@@ -7,31 +7,37 @@ const teamMembers = [
     name: 'Gaurav Saluja',
     role: 'CO-Founder',
     // Replace with your actual image paths
-    image: 'https://images.unsplash.com/photo-1566753323558-f4e0952af115', 
+    image: '/gaurav.jpeg', 
   },
   {
     id: 2,
     name: 'Rajat Goyal',
     role: 'CO-Founder',
-    image: 'https://images.unsplash.com/photo-1614533836100-dd83a8c04e29',
+    image: '/rajat.jpeg',
   },
   {
     id: 3,
     name: 'Ravi Saraswat',
     role: 'CO-Founder',
-    image: 'https://images.unsplash.com/photo-1578758803946-2c4f6738df87',
+    image: '/ravi.jpeg',
   },
   {
     id: 4,
     name: 'Akhliesh Jain',
     role: 'CO-Founder',
-    image: 'https://images.unsplash.com/photo-1596493688274-4988740bc2e5',
+    image: '/akhilesh.jpeg',
+  },
+  {
+    id: 5,
+    name: 'Pahuldeep Singh',
+    role: 'Project Manager',
+    image: '/pahuldeep.jpeg',
   },
 ];
 
 export default function TeamSection() {
   return (
-    <section className="max-w-7xl mx-auto px-4 py-20 bg-white font-sans">
+    <section className="max-w-[1600px] mx-auto px-4 py-20 bg-white font-sans">
       {/* Header Section */}
       <div className="text-left sm:text-center mb-16">
         <h2 className="text-4xl lg:text-5xl font-semibold tracking-tight text-gray-900 mb-3">
@@ -43,7 +49,7 @@ export default function TeamSection() {
       </div>
 
       {/* Grid Container */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         {teamMembers.map((member) => (
           <div 
             key={member.id} 

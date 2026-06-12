@@ -185,9 +185,9 @@ const isBlackTextRoute =
           </div>
 
           {/* DESKTOP Button */}
-          <button className={`hidden md:block bg-gradient-to-b from-sky-300 to-sky-600 text-white font-medium text-sm px-6 py-2.5 rounded-md shadow-sm hover:from-sky-400 hover:to-sky-700 cursor-pointer transition-all active:scale-95 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-1`}>
+          <Link href={'/contact'} className={`hidden md:block bg-gradient-to-b from-sky-300 to-sky-600 text-white font-medium text-sm px-6 py-2.5 rounded-md shadow-sm hover:from-sky-400 hover:to-sky-700 cursor-pointer transition-all active:scale-95 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-1`}>
             Connect With Us
-          </button>
+          </Link>
 
           {/* MOBILE Hamburger Button */}
           <button 
@@ -220,9 +220,9 @@ const isBlackTextRoute =
                   <Link href="/faq" onClick={toggleMobileMenu}>FAQ</Link>
                 </div>
                 
-                <button className="bg-[#4d74ff] text-black font-semibold px-6 py-3 rounded-full hover:bg-[#bbf03c] transition-colors w-full text-center">
-                  Buy Template
-                </button>
+                <Link href={'/contact'} className="bg-gradient-to-b from-sky-300 to-sky-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-[#bbf03c] transition-colors w-full text-center">
+                  Connect With Us
+                </Link>
               </div>
             </motion.div>
           )}
@@ -327,7 +327,7 @@ const isBlackTextRoute =
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-                  <Link href="/contact" className="text-sm text-gray-600 underline hover:text-black">
+                  <Link href="/contact-us" className="text-sm text-gray-600 underline hover:text-black">
                     Connect With Us
                   </Link>
                 </motion.div>

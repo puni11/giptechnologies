@@ -31,7 +31,7 @@ export const metadata = {
       "Contact GIP Technologies | Let's Build Your Digital Success",
     description:
       "Reach out to GIP Technologies for expert Digital Marketing, Web Development, Cloud Hosting, DevOps, and Server Management solutions.",
-    url: "https://giptechnologies.com/contact-us",
+    url: "https://giptechnologies.com/contact",
     siteName: "GIP Technologies",
     type: "website",
     locale: "en_US",
