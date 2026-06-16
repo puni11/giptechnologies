@@ -98,7 +98,6 @@ export default function Home() {
   <ProcessSection />
   <CaseStudies />
   <TeamSection />
-  <TestimonialSection />
   <CTASection />
   <ArticleGrid />
   <FAQSection />

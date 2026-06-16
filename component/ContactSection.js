@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { toast } from "react-toastify"
+import { toast } from "react-toastify";
 import { useState } from "react";
 import { LoaderIcon } from "lucide-react";
 
@@ -23,106 +23,137 @@ const SocialIcon = ({ path, delay }) => (
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
-  name: "",
-  mobile: "",
-  email: "",
-  message: "",
-});
-
-const [loading, setLoading] = useState(false);
-
-const handleChange = (e) => {
-  setFormData({
-    ...formData,
-    [e.target.name]: e.target.value,
+    name: "",
+    mobile: "",
+    email: "",
+    message: "",
   });
-};
-const validateForm = () => {
-  if (!formData.name.trim()) {
-    toast.error("Name is required");
-    return false;
-  }
 
-  if (!/^[A-Za-z\s]+$/.test(formData.name)) {
-    toast.error("Please enter a valid name");
-    return false;
-  }
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({}); // 🆕 Added state for field errors
+  const [consent, setConsent] = useState(false); // 🆕 Added state for consent
 
-  if (!/^[6-9]\d{9}$/.test(formData.mobile)) {
-    toast.error("Please enter a valid mobile number");
-    return false;
-  }
-
-  if (
-    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)
-  ) {
-    toast.error("Please enter a valid email");
-    return false;
-  }
-
-  if (formData.message.trim().length < 10) {
-    toast.error("Message must be at least 10 characters");
-    return false;
-  }
-
-  return true;
-};
-const handleSubmit = async (e) => {
-  e.preventDefault();
-
-  if (!validateForm()) return;
-
-  try {
-    setLoading(true);
-
-    const response = await fetch("/api/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
     });
 
-    const data = await response.json();
+    // Clear specific field error when user types
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: null }));
+    }
+  };
 
-    if (!response.ok) {
-      throw new Error(data.message || "Something went wrong");
+  const handleConsentChange = (e) => {
+    setConsent(e.target.checked);
+    if (errors.consent) {
+      setErrors((prev) => ({ ...prev, consent: null }));
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required";
+    } else if (!/^[A-Za-z\s]+$/.test(formData.name)) {
+      newErrors.name = "Please enter a valid name";
     }
 
-    toast.success("Message sent successfully!");
+    if (!/^[6-9]\d{9}$/.test(formData.mobile)) {
+      newErrors.mobile = "Please enter a valid 10-digit mobile number";
+    }
 
-    setFormData({
-      name: "",
-      mobile: "",
-      email: "",
-      message: "",
-    });
-  } catch (error) {
-    toast.error(error.message);
-  } finally {
-    setLoading(false);
-  }
-};
+    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
+
+    if (formData.message.trim().length < 10) {
+      newErrors.message = "Message must be at least 10 characters long";
+    }
+
+    if (!consent) {
+      newErrors.consent = "You must agree to the privacy policy to proceed";
+    }
+
+    setErrors(newErrors);
+
+    // Return true only if no errors exist
+    if (Object.keys(newErrors).length > 0) {
+      toast.error("Please fix the errors in the form");
+      return false;
+    }
+    return true;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) return;
+
+    try {
+      setLoading(true);
+
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // 🆕 Included consent details in the payload
+        body: JSON.stringify({
+          ...formData,
+          consentGiven: true,
+          consentDate: new Date().toISOString(),
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Something went wrong");
+      }
+
+      toast.success("Message sent successfully!");
+
+      // Reset form on success
+      setFormData({
+        name: "",
+        mobile: "",
+        email: "",
+        message: "",
+      });
+      setConsent(false);
+      setErrors({});
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden font-sans pt-20 pb-12 rounded-2xl">
-           <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover z-0 "
-        >
-          {/* Replace this src with your actual video path in the public folder */}
-          <source src="https://stream.mux.com/Si6ej2ZRrxRCnTYBXSScDRCdd7CGnyTqiPszZcw3z4I.m3u8" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover z-0 "
+      >
+        <source
+          src="https://stream.mux.com/Si6ej2ZRrxRCnTYBXSScDRCdd7CGnyTqiPszZcw3z4I.m3u8"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
 
-      <div className="realtive z-10 w-full max-w-7xl h-full  grid grid-cols-1 lg:grid-cols-[40%_60%] gap-4 lg:gap-0">
-        
+      <div className="relative z-10 w-full max-w-7xl h-full grid grid-cols-1 lg:grid-cols-[40%_60%] gap-4 lg:gap-0">
         {/* ========================================= */}
         {/* LEFT PANEL: Contact Information           */}
         {/* ========================================= */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
@@ -146,18 +177,19 @@ const handleSubmit = async (e) => {
                 info@giptechnologies.com
               </p>
             </div>
-            
+
             <div>
               <p className="text-gray-500 text-sm mb-2">Phone:</p>
               <p className="text-lg md:text-xl text-[#111] font-medium hover:text-gray-600 transition-colors cursor-pointer w-fit">
                 +91 99833 40133
               </p>
             </div>
-            
+
             <div>
               <p className="text-gray-500 text-sm mb-2">Office:</p>
               <p className="text-lg md:text-lg text-[#111] font-medium">
-                B-4, Jawahar Lal Nehru Marg, OPP. DAINIK BHASKAR, Vivek Vihar, Bajaj Nagar, Jaipur, Rajasthan 302054
+                B-4, Jawahar Lal Nehru Marg, OPP. DAINIK BHASKAR, Vivek Vihar,
+                Bajaj Nagar, Jaipur, Rajasthan 302054
               </p>
             </div>
           </div>
@@ -178,106 +210,183 @@ const handleSubmit = async (e) => {
           </div>
         </motion.div>
 
-
         {/* ========================================= */}
         {/* RIGHT PANEL: Form & Background Image      */}
         {/* ========================================= */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
           className="relative rounded-r-[0.5rem] overflow-hidden min-h-[600px] flex items-center justify-center p-6 md:p-12 lg:p-20"
         >
           {/* Background Image Placeholder */}
-          <div 
-            className="absolute inset-0 bg-cover bg-center"
-          
-          />
-          
+          <div className="absolute inset-0 bg-cover bg-center" />
+
           {/* Dark/Blur Overlay (Optional, to ensure form pops) */}
-          <div className="absolute inset-0 bg-black/5 backdrop-blur-sm rounded-[0.5rem]" />
+          <div className="absolute inset-0 bg-black/10 backdrop-blur-sm rounded-[0.5rem]" />
 
           {/* Form Card */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="relative w-full max-w-2xl "
+            className="relative w-full max-w-2xl"
           >
             <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
-              
               {/* Name Field */}
-              <div className="flex flex-col gap-2">
-                <label className="text-[15px] font-medium text-[#fff]">Full name</label>
-                <input 
-                   type="text"
-  name="name"
-  value={formData.name}
-  onChange={handleChange}
-  placeholder="Your full name" 
-                  
-                  className="w-full px-5 py-4 bg-white border border-gray-200 rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-400 focus:ring-1 focus:ring-gray-400 transition-all"
+              <div className="flex flex-col gap-1.5">
+                <label className="text-[15px] font-medium text-[#fff]">
+                  Full name
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Your full name"
+                  className={`w-full px-5 py-3.5 bg-white border rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none transition-all ${
+                    errors.name
+                      ? "border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500"
+                      : "border-gray-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                  }`}
                 />
+                {errors.name && (
+                  <p className="text-red-400 text-xs font-medium pl-1">{errors.name}</p>
+                )}
               </div>
-  <div className="flex flex-col gap-2">
-                <label className="text-[15px] font-medium text-[#fff]">Mobile. No.</label>
-                <input 
+
+              {/* Mobile Field */}
+              <div className="flex flex-col gap-1.5">
+                <label className="text-[15px] font-medium text-[#fff]">
+                  Mobile. No.
+                </label>
+                <input
                   type="tel"
-  name="mobile"
-  value={formData.mobile}
-  onChange={handleChange}
-  placeholder="Your Mobile Number"
-                  className="w-full px-5 py-4 bg-white border border-gray-200 rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-400 focus:ring-1 focus:ring-gray-400 transition-all"
+                  name="mobile"
+                  value={formData.mobile}
+                  onChange={handleChange}
+                  placeholder="Your Mobile Number"
+                  className={`w-full px-5 py-3.5 bg-white border rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none transition-all ${
+                    errors.mobile
+                      ? "border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500"
+                      : "border-gray-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                  }`}
                 />
+                {errors.mobile && (
+                  <p className="text-red-400 text-xs font-medium pl-1">{errors.mobile}</p>
+                )}
               </div>
+
               {/* Email Field */}
-              <div className="flex flex-col gap-2">
-                <label className="text-[15px] font-medium text-[#fff]">Email address</label>
-                <input 
-                   type="email"
-  name="email"
-  value={formData.email}
-  onChange={handleChange}
-  placeholder="Your email address"
-                  className="w-full px-5 py-4 bg-white border border-gray-200 rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-400 focus:ring-1 focus:ring-gray-400 transition-all"
+              <div className="flex flex-col gap-1.5">
+                <label className="text-[15px] font-medium text-[#fff]">
+                  Email address
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Your email address"
+                  className={`w-full px-5 py-3.5 bg-white border rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none transition-all ${
+                    errors.email
+                      ? "border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500"
+                      : "border-gray-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                  }`}
                 />
+                {errors.email && (
+                  <p className="text-red-400 text-xs font-medium pl-1">{errors.email}</p>
+                )}
               </div>
 
               {/* Message Field */}
-              <div className="flex flex-col gap-2">
-                <label className="text-[15px] font-medium text-[#fff]">Message</label>
-                <textarea 
+              <div className="flex flex-col gap-1.5">
+                <label className="text-[15px] font-medium text-[#fff]">
+                  Message
+                </label>
+                <textarea
                   name="message"
-  value={formData.message}
-  onChange={handleChange}
-  placeholder="Your message here..."
-                  className="w-full px-5 py-4 bg-white border border-gray-200 rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-400 focus:ring-1 focus:ring-gray-400 transition-all resize-none"
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Your message here..."
+                  rows={3}
+                  className={`w-full px-5 py-3.5 bg-white border rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none transition-all resize-none ${
+                    errors.message
+                      ? "border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500"
+                      : "border-gray-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                  }`}
                 />
+                {errors.message && (
+                  <p className="text-red-400 text-xs font-medium pl-1">{errors.message}</p>
+                )}
+              </div>
+
+              {/* 🆕 Consent Checkbox */}
+              <div className="flex flex-col gap-1">
+                <div className="flex items-start gap-3 mt-1">
+                  <input
+                    type="checkbox"
+                    id="consent"
+                    checked={consent}
+                    onChange={handleConsentChange}
+                    className="mt-1 h-4 w-4 rounded border-gray-300 text-sky-500 focus:ring-sky-500 cursor-pointer"
+                  />
+                  <label
+                    htmlFor="consent"
+                    className="text-[13px] text-white/90 leading-tight cursor-pointer"
+                  >
+                    I agree to the collection and processing of my personal data as outlined in the{" "}
+                    <a
+                      href="/privacy-policy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline text-sky-300 hover:text-sky-200"
+                    >
+                      Privacy Policy
+                    </a>.
+                  </label>
+                </div>
+                {errors.consent && (
+                  <p className="text-red-400 text-xs font-medium pl-7">{errors.consent}</p>
+                )}
               </div>
 
               {/* Custom Submit Button */}
               <motion.button
-              type="submit"
-              disabled={loading}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="group mt-2 self-start flex items-center bg-gradient-to-b from-sky-300 to-sky-500 rounded-lg pl-8 pr-4 py-2 shadow-lg"
+                type="submit"
+                disabled={loading || !consent}
+                whileHover={!loading && consent ? { scale: 1.02 } : {}}
+                whileTap={!loading && consent ? { scale: 0.98 } : {}}
+                className={`group mt-3 self-start flex items-center bg-gradient-to-b from-sky-300 to-sky-500 rounded-lg pl-8 pr-4 py-2 shadow-lg transition-all ${
+                  !consent || loading ? "opacity-60 cursor-not-allowed grayscale-[30%]" : ""
+                }`}
               >
                 <span className="text-[#ffffff] text-xs font-bold tracking-[0.15em] mr-6">
-                  {loading ? "Submitting..." : "SUBMIT"}
+                  {loading ? "SUBMITTING..." : "SUBMIT"}
                 </span>
-               {loading? <LoaderIcon size={14} />  : <div className="w-9 h-9 rounded-full bg-[#f0f0f0]/10 flex items-center justify-center group-hover:rotate-45 transition-transform duration-300">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="white" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                    <polyline points="12 5 19 12 12 19"></polyline>
-                  </svg>
-                </div>}
+                {loading ? (
+                  <LoaderIcon size={14} className="animate-spin text-white" />
+                ) : (
+                  <div className="w-9 h-9 rounded-full bg-[#f0f0f0]/10 flex items-center justify-center group-hover:rotate-45 transition-transform duration-300">
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="white"
+                      stroke="white"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </div>
+                )}
               </motion.button>
-              
             </form>
           </motion.div>
         </motion.div>
-
       </div>
     </section>
   );

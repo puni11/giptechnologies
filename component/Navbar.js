@@ -179,7 +179,7 @@ const isBlackTextRoute =
               <RolloverLink href="/about">About</RolloverLink>
               <RolloverLink href="/case-studies">Case Studies</RolloverLink>
               <RolloverLink href="/blogs">Blogs</RolloverLink>
-              <RolloverLink href="/contact-us">Contact</RolloverLink>
+              <RolloverLink href="/contact">Contact</RolloverLink>
               
             </div>
           </div>
