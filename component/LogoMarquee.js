@@ -7,11 +7,11 @@ import { Star } from "lucide-react";
 
 // Replace these with your actual image paths
 const LOGOS = [
-  { name: "United Healthcare", src: "/logos/united.svg" },
-  { name: "Aetna", src: "/logos/aetna.svg" },
-  { name: "Cigna", src: "/logos/cigna.svg" },
-  { name: "Anthem", src: "/logos/anthem.svg" },
-  { name: "CVS Pharmacy", src: "/logos/cvs.svg" },
+  { name: "Aurette", src: "/logos/united.svg" },
+  { name: "Kayapalat", src: "/logos/aetna.svg" },
+  { name: "AP2V", src: "/logos/cigna.svg" },
+  { name: "Grras Solutions", src: "/logos/anthem.svg" },
+  { name: "Aavas", src: "/logos/cvs.svg" },
 ];
 
 export default function LogoMarquee() {

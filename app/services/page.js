@@ -1,4 +1,5 @@
 import CardMarquee from "@/component/CardMarquee";
+import CaseStudies from "@/component/CaseStudies";
 import FadeIn from "@/component/FadeIn";
 import LogoMarquee from "@/component/LogoMarquee";
 import ServicesBento from "@/component/ServicesBento";
@@ -138,7 +139,7 @@ export default function Page() {
       
       <ServicesBento />
       <WhyUsSection />
-      <TestimonialSection/>
+      <CaseStudies />
     </>
   );
 }

@@ -1,4 +1,5 @@
 import StatsSection from "@/component/AnimatedCounter";
+import CaseStudies from "@/component/CaseStudies";
 import MarketingBenefits from "@/component/MarketingBenefits";
 import ServiceStack from "@/component/ServiceStack";
 import TestimonialSection from "@/component/TestimonialSection";
@@ -286,7 +287,7 @@ Hosting Solutions
   services={webDevServices}
 />
       <WhyUsSection />
-      <TestimonialSection/>
+      <CaseStudies/>
     </>
   );
 }

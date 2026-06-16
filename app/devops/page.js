@@ -1,5 +1,6 @@
 import StatsSection from "@/component/AnimatedCounter";
 import CardMarquee from "@/component/CardMarquee";
+import CaseStudies from "@/component/CaseStudies";
 import MarketingBenefits from "@/component/MarketingBenefits";
 import ServicesBento from "@/component/ServicesBento";
 import ServiceStack from "@/component/ServiceStack";
@@ -287,7 +288,7 @@ Intelligent CI/CD
       services={webDevServices}
     />
       <WhyUsSection />
-      <TestimonialSection/>
+      <CaseStudies/>
     </>
   );
 }
