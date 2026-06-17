@@ -214,10 +214,10 @@ const isBlackTextRoute =
                 <div className="flex flex-col space-y-4 font-medium text-lg text-gray-900">
                   <Link href="/" onClick={toggleMobileMenu}>Home</Link>
                   <Link href="/about" onClick={toggleMobileMenu}>About</Link>
-                  <Link href="/pricing" onClick={toggleMobileMenu}>Pricing</Link>
-                  <Link href="/stories" onClick={toggleMobileMenu}>Stories</Link>
+                  <Link href="/services" onClick={toggleMobileMenu}>Services</Link>
+                  <Link href="/case-studies" onClick={toggleMobileMenu}>Case Studies</Link>
                   <Link href="/contact" onClick={toggleMobileMenu}>Contact</Link>
-                  <Link href="/faq" onClick={toggleMobileMenu}>FAQ</Link>
+                  <Link href="/blogs" onClick={toggleMobileMenu}>Blogs</Link>
                 </div>
                 
                 <Link href={'/contact'} className="bg-gradient-to-b from-sky-300 to-sky-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-[#bbf03c] transition-colors w-full text-center">
