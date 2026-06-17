@@ -27,17 +27,18 @@ const teamMembers = [
     role: 'CO-Founder',
     image: '/akhilesh.jpeg',
   },
-  {
-    id: 5,
-    name: 'Pahuldeep Singh',
-    role: 'Project Manager',
-    image: '/pahuldeep.jpeg',
-  },
+  
   {
     id: 6,
     name: 'Tanveer Singh',
     role: 'Corporate and Alliance Manager',
     image: '/Tanveer.png',
+  },
+  {
+    id: 5,
+    name: 'Pahuldeep Singh',
+    role: 'Project Manager',
+    image: '/pahuldeep.jpeg',
   },
   
   {
