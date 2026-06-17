@@ -37,7 +37,7 @@ const teamMembers = [
     id: 6,
     name: 'Tanveer Singh',
     role: 'Corporate and Alliance Manager',
-    image: '/tanveer.png',
+    image: '/Tanveer.png',
   },
   
   {
