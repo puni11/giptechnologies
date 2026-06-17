@@ -33,6 +33,26 @@ const teamMembers = [
     role: 'Project Manager',
     image: '/pahuldeep.jpeg',
   },
+  {
+    id: 6,
+    name: 'Tanveer Singh',
+    role: 'Corporate and Alliance Manager',
+    image: '/tanveer.png',
+  },
+  
+  {
+    id: 7,
+    name: 'Rohit Devani',
+    role: 'Digital Marketing Manager',
+    image: '/rohit.png',
+  },
+   
+  {
+    id: 8,
+    name: 'Puneet Sharma',
+    role: 'Full Stack Developer',
+    image: '/puneet.png',
+  },
 ];
 
 export default function TeamSection() {
