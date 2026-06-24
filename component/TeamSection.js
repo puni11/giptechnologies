@@ -7,7 +7,7 @@ const teamMembers = [
     name: 'Gaurav Saluja',
     role: 'CO-Founder',
     // Replace with your actual image paths
-    image: '/gaurav.jpeg', 
+    image: '/gaurvsir.jpeg', 
   },
   {
     id: 2,
