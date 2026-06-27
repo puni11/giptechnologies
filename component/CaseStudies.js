@@ -31,7 +31,7 @@ const caseStudies = [
   {
     id: 3,
     brand: "Grras",
-    logoText: "Grass Solutions",
+    logoText: "Grras Solutions",
     description: "Optimized the customer journey to increase purchase intent and retention.",
     images : "/aurd.png",
     websiteUrl: "https://grras.com", // Add the actual URL here
