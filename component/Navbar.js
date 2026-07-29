@@ -87,7 +87,7 @@ export default function Navbar() {
   const borderRadius = useTransform(springProgress, [0, 1], ["16px", "24px"]);
 
   // 3. Define the routes where the navbar text should be black
-  const exactBlackTextRoutes = ["/services", "/case-studies", "/faq","/digital-marketing", "/web-development", "/devops" , "/cloud-hosting" , "/server-management"]; 
+  const exactBlackTextRoutes = ["/services","/digital-marketing-service", "/case-studies", "/faq","/digital-marketing", "/web-development", "/devops" , "/cloud-hosting" , "/server-management"]; 
 
 const isBlackTextRoute = 
   pathname.startsWith("/blogs") || exactBlackTextRoutes.includes(pathname);
