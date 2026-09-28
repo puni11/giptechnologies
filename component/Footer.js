@@ -196,7 +196,7 @@ export default function CTAAndFooter() {
             
             <div className="flex flex-col gap-3">
               <p className="text-[10px] font-bold tracking-widest text-gray-800 uppercase mb-2">Main Pages</p>
-              <a href="/link" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Home</a>
+              <a href="/" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Home</a>
               <a href="/about" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">About</a>
               <a href="/services" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Services</a>
               <a href="/contact" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Contact Us</a>

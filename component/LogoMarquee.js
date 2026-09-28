@@ -25,7 +25,7 @@ export default function LogoMarquee() {
 
       {/* Top Left Text */}
       <div className="flex flex-col sm:flex-row justify-between z-10 px-8 pb-8 sm:px-12">
-        <p className="max-w-lg text-sm text-center sm:text-left font-medium leading-relaxed text-black md:text-base">
+        <p className="max-w-lg text-sm text-center sm:text-left font-medium leading-relaxed text-black md:text-base text-white">
   Helping businesses scale with innovative Digital Marketing, <br className="hidden sm:block" />
   Cloud Infrastructure and Modern Web Development solutions.
 </p>
@@ -33,7 +33,7 @@ export default function LogoMarquee() {
                   <p className="text-sm font-medium text-right">Rated 4.9/5 by 4,900+ clients</p>
                   <div className="flex items-center gap-1">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={18} className="fill-[#8ad6ff] text-[#8ad6ff]" />
+                    <Star key={i} size={18} className="fill-[#ffe30e] text-[#ffe30e]" />
                   ))}
                 </div>
         
@@ -59,7 +59,7 @@ export default function LogoMarquee() {
                 className="flex items-center justify-center opacity-70 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
               >
                 {/* Fallback text if you don't have images yet */}
-                <h3 className="text-2xl font-bold text-black">{logo.name}</h3>
+                <h3 className="text-2xl font-bold text-white">{logo.name}</h3>
                 
                 {/* Uncomment this when you have your actual SVG assets ready:
                   <Image src={logo.src} alt={logo.name} width={120} height={40} className="object-contain" /> 
@@ -75,7 +75,7 @@ export default function LogoMarquee() {
                 key={`logo-2-${index}`}
                 className="flex items-center justify-center opacity-70 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
               >
-                <h3 className="text-2xl font-bold text-black">{logo.name}</h3>
+                <h3 className="text-2xl font-bold text-white">{logo.name}</h3>
               </div>
             ))}
           </div>

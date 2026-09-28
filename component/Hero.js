@@ -21,7 +21,7 @@ export default function Hero() {
           className="absolute inset-0 w-full h-full object-cover z-0 "
         >
           {/* Replace this src with your actual video path in the public folder */}
-          <source src="https://stream.mux.com/Si6ej2ZRrxRCnTYBXSScDRCdd7CGnyTqiPszZcw3z4I.m3u8" type="video/mp4" />
+          <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260613_180732_a54afbf6-b30d-470e-861f-669871f09f67.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
 
