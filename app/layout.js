@@ -38,7 +38,7 @@ export default function RootLayout({ children }) {
   toastClassName="custom-toast"
   bodyClassName="custom-toast-body"
 />
-        <ExpandingNavbar/>
+        {/* <ExpandingNavbar/> */}
         {children}</body>
         <Footer />
     </html>
