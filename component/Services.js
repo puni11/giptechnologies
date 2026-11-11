@@ -66,6 +66,20 @@ const services = [
    image: "/work.jpg",
     alt: "Hand holding a phone with a pink and violet gradient screen",
 },
+  {
+  n: "05",
+  title: ["Be Found By", "The Right People"],
+  text: "(SEO, AEO, and GEO) that helps your brand get discovered by the right audience at the right time.",
+  items: [
+    "Searxh engine optimization (SEO)",
+    "Content marketing",
+    "Outreach and link building",
+    "Answer Engine Optimization (AEO)",
+  ],
+   type: "video",
+  video: "/seo.mp4",
+    alt: "Hand holding a phone with a pink and violet gradient screen",
+}
 ];
 
 function ServiceCard({ service, index }) {
@@ -146,7 +160,7 @@ export default function Services() {
     <section className="relative overflow-clip bg-black px-4 pt-[120px] pb-[160px]">
       {/* Drop the dark metallic backdrop at /public/services-bg.jpg */}
       <Image
-        src="/services-bg.jpg"
+        src="https://images.unsplash.com/photo-1770795263297-9289a582a68d"
         alt=""
         fill
         sizes="100vw"
