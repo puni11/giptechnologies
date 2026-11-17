@@ -71,7 +71,7 @@ function SectionHeading({ tag, top, bottom }) {
 /* ---------- main component ---------- */
 export default function GoalsImpactSection({
   handImage ="/connect.jpg", // e.g. "/images/hands.png"
-  dancerImage="/create.jpg", // e.g. "/images/dancer.jpg"
+  dancerImage="/creativity.png", // e.g. "/images/dancer.jpg"
   textureImage, // e.g. "/images/rocks.jpg"
 }) {
   const reduce = useReducedMotion();

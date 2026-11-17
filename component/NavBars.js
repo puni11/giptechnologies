@@ -1,4 +1,6 @@
+
 import Link from "next/link";
+import RevenueCounter from "./RevenueCounter";
 
 const links = [
   { label: "Home", href: "/", n: "01" },
@@ -9,15 +11,46 @@ const links = [
 
 export default function Navbar() {
   return (
-    <header className="absolute inset-x-0 top-0 z-10 flex h-[73px] items-center justify-between px-4 text-white lg:pr-[51px] lg:pl-14">
-      <Link
-        href="/"
-        aria-label="Operator.X home"
-        className="font-display text-[22px] leading-none font-bold tracking-[-0.5px] uppercase"
-      >
-        GIP.TECHNOLOGIES
-      </Link>
+    <header className="absolute inset-x-0 top-0 z-20 flex min-h-[90px] items-center justify-between px-4 py-3 text-white lg:pr-[51px] lg:pl-14">
 
+      {/* Brand + Revenue Stat */}
+      <div className="flex flex-col items-start gap-[5px]">
+        <div data-brand-stat className="flex flex-col gap-[2px]">
+          <span
+  className="text-[9px] leading-none font-bold tracking-[1.1px] text-white/65 uppercase"
+>
+  Revenue driven for our clients
+</span>
+          <div className="flex items-center gap-[5px] ">
+            {/* Growth Icon */}
+            <svg
+              viewBox="0 0 18 18"
+              fill="none"
+              className="size-[13px] text-accent"
+              aria-hidden="true"
+            >
+              <rect x="2" y="9" width="3" height="7" rx="1" fill="currentColor" />
+              <rect x="7.5" y="5" width="3" height="11" rx="1" fill="currentColor" />
+              <rect x="13" y="2" width="3" height="14" rx="1" fill="currentColor" />
+            </svg>
+
+          <RevenueCounter />
+
+      
+          </div>
+        </div>
+
+       <Link
+  href="/"
+  data-brand-logo
+  aria-label="GIP Technologies home"
+  className="font-display text-[22px] leading-none font-bold tracking-[-0.5px] uppercase"
+>
+  GIP.TECHNOLOGIES
+</Link>
+      </div>
+
+      {/* Navigation */}
       <nav aria-label="Primary" className="flex items-center gap-10">
         <ul className="hidden items-center gap-8 min-[900px]:flex">
           {links.map(({ label, href, n }) => (
