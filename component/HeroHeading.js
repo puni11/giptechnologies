@@ -39,33 +39,27 @@ export default function HeroHeading() {
       </span>
 
       <span className="flex items-center gap-[0.12em]">
-        Agency
-        <svg
-          viewBox="0 0 76 76"
-          aria-hidden="true"
-          className="ml-[0.04em] size-[0.76em] -translate-y-[0.02em] text-accent"
-        >
-          <g fill="currentColor">
-            <rect x="30" y="0" width="16" height="76" rx="2" />
-            <rect
-              x="30"
-              y="0"
-              width="16"
-              height="76"
-              rx="2"
-              transform="rotate(60 38 38)"
-            />
-            <rect
-              x="30"
-              y="0"
-              width="16"
-              height="76"
-              rx="2"
-              transform="rotate(120 38 38)"
-            />
-          </g>
-        </svg>
-      </span>
+  Agency
+  <svg
+    viewBox="0 0 76 76"
+    aria-hidden="true"
+    className="ml-[0.04em] size-[0.76em] -translate-y-[0.02em] text-[#c4232b] animate-spin [animation-duration:4s] "
+  >
+    <g fill="currentColor">
+      {Array.from({ length: 8 }).map((_, i) => (
+        <rect
+          key={i}
+          x="34"
+          y="0"
+          width="10"
+          height="76"
+          rx="2"
+          transform={`rotate(${(180 / 4) * i-1} 38 38)`}
+        />
+      ))}
+    </g>
+  </svg>
+</span>
     </h1>
   );
 }

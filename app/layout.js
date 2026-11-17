@@ -3,6 +3,7 @@ import "./globals.css";
 import ExpandingNavbar from "@/component/Navbar";
 import Footer from "@/component/Footer";
 import { ToastContainer } from "react-toastify";
+import Preloader from "@/component/Preloader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,6 +27,7 @@ export default function RootLayout({ children }) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased font-sans selection:bg-[#B7F365]`}
     >
       <body className="min-h-full flex flex-col">
+        <Preloader />
         <ToastContainer
   position="top-right"
   autoClose={4000}

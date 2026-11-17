@@ -9,13 +9,14 @@ export default function Hero() {
 
       {/* Drop the portrait cut-out at /public/hero.jpg */}
       <Image
-        src="/heroimage.jpeg"
+        src="/heros2.png"
         alt="Portrait of a woman with curly red hair, a red hoop earring and a white turtleneck"
         fill
         priority
         sizes="100vw"
         className="z-0 object-cover object-top"
       />
+  <div className="absolute inset-0 z-[1] bg-black/15 pointer-events-none" />
 
      <HeroHeading />
 
